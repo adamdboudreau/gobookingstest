@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    <title>Bootstrap demo</title>
+    <style>
+        .my-footer { background-color: green; margin-top: 1.2em; padding: 1em;}
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="generals.html">Generals</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="majors.html">Majors</a></li>
+                </ul>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            </div>
+        </div>
+    </nav>
+        
+    <h1>Hello, world!</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                yo
+            </div>
+            <div class="col">
+                yo
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <form action="index.html" method="get">
+                <div class="input-group mb-3">
+                    
+                <div class=" ">
+                  <label for="startDateInput" class="form-label">Start date</label>
+                  <input type="text" class="form-control" id="startDateInput" name="startDateInput" aria-describedby="startDateInput" required>
+                  <div id="startDateInput" class="form-text">Enter date format yyyy-mm-dd.</div>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div id="validationServerStartDate" class="invalid-feedback">
+                    Please enter correct date.
+                  </div>
+                </div>
+
+                <div class=" ">
+                    <label for="endDateInput" class="form-label">End date</label>
+                    <input type="text" class="form-control" id="endDateInput" name="endDateInput" aria-describedby="endDateInput" required>
+                    <div id="endDateInput" class="form-text">Enter date format yyyy-mm-dd.</div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <!-- https://getbootstrap.com/docs/5.3/forms/validation/ -->
+            <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (() => {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                    }, false)
+                })
+                })()
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p id="myParagraph">This is some text.</p>
+            <button id="colorButton" class="btn btn-primary">click me</button>
+        </div>
+    </div>
+
+    <div class="row my-footer ">
+        <div class="col">
+            left foot
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <script >
+        console.log("log");
+        let myEl = document.getElementById("myParagraph");
+
+        console.log(myEl.innerText);
+        myEl.classList.add("test-new-class");
+
+        let myButton = document.getElementById("colorButton");
+
+        document.getElementById("colorButton").addEventListener("click", function() {
+            myEl.append("test stuff");
+        });
+        
+    </script>
+  </body>
+
+</html>
