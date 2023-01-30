@@ -1,3 +1,5 @@
 .my-footer { background-color: green; margin-top: 1.2em; padding: 1em;}
 
 .datepicker-picker { z-index: 10000; }
+
+.datepicker-dropdown { z-index: 10000; }

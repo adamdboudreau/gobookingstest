@@ -1,0 +1,51 @@
+{{template "base" .}}
+
+{{define "below-nav-content"}}
+    <h1>Majors</h1>
+{{end}}
+
+{{define "content"}}
+    
+    <h1>Hello, Major!</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                Major
+            </div>
+            <div class="col">
+                Major
+            </div>
+        </div>
+
+        <div class="row">
+            <a href="#!" class="btn btn-primary" id="search-availability">Search Availability</a>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+<script>
+
+    document.getElementById("search-availability").addEventListener("click", function() {
+            
+            let html = `
+            <form id="check-avail-form" action="" method="post" novalidate class="needs-validation">
+                <div class="form-row row">
+                    <div class="col">
+                        <div class="form-row" id="reservation-dates-modal">
+                            <div class="col">
+                                <input disabled required type="text" class="form-control" name="start" id="start">
+                            </div>
+                            <div class="col">
+                                <input disabled required type="text" class="form-control" name="end" id="end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            `
+            attention.custom({ msg: html, title: "Choose some dates" });
+        });
+</script>
+{{end}}

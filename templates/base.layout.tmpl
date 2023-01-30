@@ -28,19 +28,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="generals.html">Generals</a></li>
+                    <li><a class="dropdown-item" href="/search_availability">Search Availability</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="majors.html">Majors</a></li>
+                    <li><a class="dropdown-item" href="/generals">Generals</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/majors">Majors</a></li>
                 </ul>
                 </li>
                 <li class="nav-item">
@@ -55,104 +57,8 @@
         </div>
     </nav>
         
-    <h1>Hello, world!</h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                yo
-            </div>
-            <div class="col">
-                yo
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <form action="index.html" method="get" novalidate class="needs-validation">
-                <div class="input-group mb-3">
-                    
-                <div class=" ">
-                  <label for="startDateInput" class="form-label">Start date</label>
-                  <input type="text" class="form-control" id="startDateInput" name="startDateInput" aria-describedby="startDateInput" required>
-                  <div id="startDateInput" class="form-text">Enter date format yyyy-mm-dd.</div>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div id="validationServerStartDate" class="invalid-feedback">
-                    Please enter correct date.
-                  </div>
-                </div>
-
-                <div class=" ">
-                    <label for="endDateInput" class="form-label">End date</label>
-                    <input type="text" class="form-control" id="endDateInput" name="endDateInput" aria-describedby="endDateInput" required>
-                    <div id="endDateInput" class="form-text">Enter date format yyyy-mm-dd.</div>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <div id="dateRangePicker" class="form-row row">
-                            <div class="col">
-                                <input required type="text" name="start" class="form-control" placholder="start">
-                                <div class="valid-feedback">
-                                    Looks good!
-                                  </div>
-                                  <div id="validationStartDate" class="invalid-feedback">
-                                    Please enter correct date.
-                                  </div>
-                            </div>
-                            <div class="col">
-                                <input required type="text" name="end" class="form-control" placeholder="end">
-                                <div class="valid-feedback">
-                                    Looks good!
-                                  </div>
-                                  <div id="validationEndDate" class="invalid-feedback">
-                                    Please enter correct date.
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-            <!-- https://getbootstrap.com/docs/5.3/forms/validation/ -->
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (() => {
-                'use strict'
-
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                const forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                    }, false)
-                })
-                })()
-            </script>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <p id="myParagraph">This is some text.</p>
-            <button id="colorButton" class="btn btn-primary">click me</button>
-        </div>
-    </div>
+    {{block "below-nav-content" .}}
+    {{end}}
 
     <div class="row my-footer ">
         <div class="col">
@@ -169,49 +75,38 @@
 
     <script >
         let attention = Prompt();
-        console.log("log");
-        let myEl = document.getElementById("myParagraph");
+        // console.log("log");
+        // let myEl = document.getElementById("myParagraph");
+        // console.log(myEl.innerText);
+        // myEl.classList.add("test-new-class");
 
-        console.log(myEl.innerText);
-        myEl.classList.add("test-new-class");
+        // let myButton = document.getElementById("colorButton");
 
-        let myButton = document.getElementById("colorButton");
-
-        document.getElementById("colorButton").addEventListener("click", function() {
-            // myEl.append("test stuff");
-            // lookupGithubName();
-            // notifyModal("title", "<em>Hello world</em>", "error", "Ok", '<a href="">Why do I have this issue?</a>');
-            // attention.toast({msg: "Hello world !"});
-            //attention.success({});
+        // document.getElementById("colorButton").addEventListener("click", function() {
+        //     // myEl.append("test stuff");
+        //     // lookupGithubName();
+        //     // notifyModal("title", "<em>Hello world</em>", "error", "Ok", '<a href="">Why do I have this issue?</a>');
+        //     // attention.toast({msg: "Hello world !"});
+        //     //attention.success({});
             
-            let html = `
-            <form id="check-avail-form" action="" method="post" novalidate class="needs-validation">
-                <div class="form-row row">
-                    <div class="col">
-                        <div class="form-row" id="reservation-dates-modal">
-                            <div class="col">
-                                <input disabled required type="text" class="form-control" name="start" id="start">
-                            </div>
-                            <div class="col">
-                                <input disabled required type="text" class="form-control" name="end" id="end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            `
-            attention.custom({ msg: html, title: "Choose some dates" });
-        });
-
-        const startDateElem = document.querySelector('input[name="startDateInput"]');
-        const startDatepicker = new Datepicker(startDateElem, { });
-        const endDateElem = document.querySelector('input[name="endDateInput"]');
-        const endDatepicker2 = new Datepicker(endDateElem, { });
-        const elem = document.getElementById('dateRangePicker');
-        const rangepicker = new DateRangePicker(elem, {
-        // ...options
-        });
-
+        //     let html = `
+        //     <form id="check-avail-form" action="" method="post" novalidate class="needs-validation">
+        //         <div class="form-row row">
+        //             <div class="col">
+        //                 <div class="form-row" id="reservation-dates-modal">
+        //                     <div class="col">
+        //                         <input disabled required type="text" class="form-control" name="start" id="start">
+        //                     </div>
+        //                     <div class="col">
+        //                         <input disabled required type="text" class="form-control" name="end" id="end">
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </form>
+        //     `
+        //     attention.custom({ msg: html, title: "Choose some dates" });
+        // });
 
         function lookupGithubName() {
             Swal.fire({

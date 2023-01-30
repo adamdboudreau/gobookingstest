@@ -1,0 +1,100 @@
+{{template "base" .}}
+
+{{define "below-nav-content"}}
+    <h1>Book Room</h1>
+{{end}}
+
+{{define "content"}}
+    
+    <h1>Hello, Major!</h1>
+
+    <div class="container">
+
+        <div class="row">
+            
+            <form action="index.html" method="get" novalidate class="needs-validation">
+                    
+                <div class=" form-row row">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" required>
+                  
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div id="validationServerStartDate" class="invalid-feedback">
+                    Please enter name
+                  </div>
+                </div>
+
+                <div class=" form-row row">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName" required>
+                  
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div id="validationServerStartDate" class="invalid-feedback">
+                    Please enter name
+                  </div>
+                </div>
+
+                <div class=" form-row row">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone" required>
+                    
+                    <div class="valid-feedback">
+                      Looks good!
+                    </div>
+                    <div id="validationServerStartDate" class="invalid-feedback">
+                      Please enter phone number
+                    </div>
+                </div>
+
+                <div class=" form-row row">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="text" class="form-control" id="email" name="email" aria-describedby="email" required>
+                    
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div id="validationServerStartDate" class="invalid-feedback">
+                        Please enter email
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class=" form-row row">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+{{end}}
+
+
+{{define "js"}}
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+        }, false)
+    })
+})()
+
+</script>
+{{end}}

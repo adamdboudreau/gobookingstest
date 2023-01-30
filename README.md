@@ -1,5 +1,8 @@
 # Bookings & Reservations
 
+Startup:
+go run cmd/web/*.go
+
 This is the repository for my bookings & reservations project.
 
 - Built in Go version 1.17
