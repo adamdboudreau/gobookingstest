@@ -1,11 +1,12 @@
 package handlers
 
 import (
-	"net/http"
-
 	"bookings/pkg/config"
 	"bookings/pkg/models"
 	"bookings/pkg/render"
+	"encoding/json"
+	"fmt"
+	"net/http"
 )
 
 // repository pattern - allow us to swap out components of site with little changes to the code that uses it
@@ -67,7 +68,35 @@ func (m *Repository) SearchAvailability(w http.ResponseWriter, r *http.Request) 
 
 // PostAvailability post page
 func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("post availability"))
+	start := r.Form.Get("start")
+	end := r.Form.Get("end")
+	w.Write([]byte(fmt.Sprintf("post availability; start date is %s, end is %s", start, end)))
+
+	// render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
+}
+
+type jsonResponse struct {
+	OK      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
+// AvailabilityJSON search availability and render json
+func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
+	resp := jsonResponse{
+		OK:      true,
+		Message: "Available!",
+	}
+	out, err := json.MarshalIndent(resp, "", "   ")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(out))
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(out)
+
+	// start := r.Form.Get("start")
+	// end := r.Form.Get("end")
+	// w.Write([]byte(fmt.Sprintf("post availability; start date is %s, end is %s", start, end)))
 
 	// render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
 }
