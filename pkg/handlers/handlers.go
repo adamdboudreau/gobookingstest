@@ -133,6 +133,7 @@ func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
 	form.Required("firstName", "lastName", "phone", "email")
 	form.MinLength("firstName", 3, r)
 	form.MinLength("lastName", 3, r)
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
@@ -144,6 +145,25 @@ func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	http.Redirect(w, r, "/reservation_summary", http.StatusSeeOther)
+	return
+}
+
+// ReservationSummary reservation summary page
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+	if !ok {
+		fmt.Println("cannot get item from session")
+		return
+	}
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+	render.RenderTemplate(w, r, "reservation_summary.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
 }
 
 /*
