@@ -11,12 +11,22 @@
     <div class="container">
 
         <div class="row">
-            
-            <form action="index.html" method="get" novalidate class="needs-validation">
-                    
+            {{$res := index .Data "reservation"}}
+
+            <form action="/book_room" method="post" novalidate class="needs -validation">
+              <input type="hidden" name="csrf_token" value={{.CSRFToken}}>
+
                 <div class=" form-row row">
                   <label for="firstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstName" required>
+
+                  {{with .Form.Errors.Get "firstName"}}
+                    <label class="text-danger">{{.}}</label>
+                  {{end}}
+
+                  <input type="text" 
+                      class="form-control {{with .Form.Errors.Get "firstName"}} is-invalid {{end}}" 
+                      id="firstName" name="firstName" aria-describedby="firstName" 
+                      value="{{$res.FirstName}}"  required>
                   
                   <div class="valid-feedback">
                     Looks good!
@@ -28,7 +38,11 @@
 
                 <div class=" form-row row">
                   <label for="lastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastName" required>
+                  {{with .Form.Errors.Get "lastName"}}
+                    <label class="text-danger">{{.}}</label>
+                  {{end}}
+                  <input type="text" class="form-control {{with .Form.Errors.Get "lastName"}} is-invalid {{end}}" id="lastName" name="lastName" aria-describedby="lastName" 
+                  value="{{$res.LastName}}" required>
                   
                   <div class="valid-feedback">
                     Looks good!
@@ -40,7 +54,11 @@
 
                 <div class=" form-row row">
                     <label for="phone" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" name="phone" aria-describedby="phone" required>
+                    {{with .Form.Errors.Get "phone"}}
+                      <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input type="text" class="form-control {{with .Form.Errors.Get "phone"}} is-invalid {{end}}" id="phone" name="phone" aria-describedby="phone"
+                    value="{{$res.Phone}}" required>
                     
                     <div class="valid-feedback">
                       Looks good!
@@ -52,7 +70,11 @@
 
                 <div class=" form-row row">
                     <label for="email" class="form-label">Email Address</label>
-                    <input type="text" class="form-control" id="email" name="email" aria-describedby="email" required>
+                    {{with .Form.Errors.Get "email"}}
+                      <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input type="text" class="form-control {{with .Form.Errors.Get "email"}} is-invalid {{end}}" id="email" name="email" aria-describedby="email"
+                    value="{{$res.Email}}" required>
                     
                     <div class="valid-feedback">
                         Looks good!

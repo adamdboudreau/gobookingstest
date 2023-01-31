@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"bookings/pkg/config"
+	"bookings/pkg/forms"
 	"bookings/pkg/models"
 	"bookings/pkg/render"
 	"encoding/json"
@@ -103,7 +104,46 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 // BookRoom room page
 func (m *Repository) BookRoom(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "book-room.page.tmpl", &models.TemplateData{})
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+
+	render.RenderTemplate(w, r, "book-room.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+		Data: data,
+	})
+}
+
+// PostBookRoom handles post of booking a room
+func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	reservation := models.Reservation{
+		FirstName: r.Form.Get("firstName"),
+		LastName:  r.Form.Get("lastName"),
+		Phone:     r.Form.Get("phone"),
+		Email:     r.Form.Get("email"),
+	}
+	form := forms.New(r.PostForm)
+	// form.Has("firstName", r)
+	form.Required("firstName", "lastName", "phone", "email")
+	form.MinLength("firstName", 3, r)
+	form.MinLength("lastName", 3, r)
+
+	if !form.Valid() {
+		data := make(map[string]interface{})
+		data["reservation"] = reservation
+
+		render.RenderTemplate(w, r, "book-room.page.tmpl", &models.TemplateData{
+			Form: form,
+			Data: data,
+		})
+		return
+	}
 }
 
 /*
