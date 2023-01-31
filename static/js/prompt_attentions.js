@@ -77,7 +77,7 @@
                 confirmButtonText = "Submit",
             } = c;
 
-            const {value: formValues } = await Swal.fire({
+            const {value: result } = await Swal.fire({
                 icon: "success",
                 title: title,
                 html: msg,
@@ -86,24 +86,48 @@
                 showCancelButton: true,
                 confirmButtonText: confirmButtonText,
                 willOpen: () => {
-                    const elem = document.getElementById("reservation-dates-modal");
-                    const rp = new DateRangePicker(elem, {format: 'yyyy-mm-dd'});
+                    if (c.willOpen !== undefined) {
+                        c.willOpen();
+                    }
                 },
                 preConfirm: () => {
-                    return [
-                        document.getElementById('start').value,
-                        document.getElementById('end').value,
-                    ]
+                    if (c.preConfirm !== undefined) {
+                        c.preConfirm();
+                    }
                 },
                 didOpen: () => {
-                    return [
-                        document.getElementById("start").removeAttribute('disabled'),
-                        document.getElementById("end").removeAttribute('disabled')
-                    ]
+                    if (c.didOpen !== undefined) {
+                        c.didOpen();
+                    }
                 }
+                // willOpen: () => {
+                //     const elem = document.getElementById("reservation-dates-modal");
+                //     const rp = new DateRangePicker(elem, {format: 'yyyy-mm-dd', orientation: 'top'});
+                // },
+                // preConfirm: () => {
+                //     return [
+                //         document.getElementById('start').value,
+                //         document.getElementById('end').value,
+                //     ]
+                // },
+                // didOpen: () => {
+                //     return [
+                //         document.getElementById("start").removeAttribute('disabled'),
+                //         document.getElementById("end").removeAttribute('disabled')
+                //     ]
+                // }
             })
-            if (formValues) {
-                Swal.fire(JSON.stringify(formValues));
+            // if (result) {
+            //     Swal.fire(JSON.stringify(result));
+            // }
+            if (result) {
+                if (result.dismiss !== Swal.DismissReason.cancel) {
+                    if (result.value !== "") {
+                        if (c.callback !== undefined) {
+                            c.callback(result)
+                        }
+                    }
+                }
             }
         }
 
