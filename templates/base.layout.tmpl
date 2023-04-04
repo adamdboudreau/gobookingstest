@@ -43,6 +43,8 @@
                     <li><a class="dropdown-item" href="/generals">Generals</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="/majors">Majors</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/book_room">Book Room</a></li>
                 </ul>
                 </li>
                 <li class="nav-item">
@@ -143,7 +145,17 @@
             })
         }
 
+        {{with .Error}}
+        notify("{{.}}", "error")
+        {{end}}
 
+        {{with .Flash}}
+        notify("{{.}}", "success")
+        {{end}}
+
+        {{with .Warning}}
+        notify("{{.}}", "warning")
+        {{end}}
     </script>
 
     {{block "content" .}}

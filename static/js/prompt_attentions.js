@@ -1,3 +1,10 @@
+    function notify(msg, msgType) {
+        Swal.fire({
+            icon: msgType,
+            title: "",
+            html: msg
+        })
+    }
 
     // https://sweetalert2.github.io/#examples
     // icon - error, info, success, warning
