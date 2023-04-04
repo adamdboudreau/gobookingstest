@@ -10,6 +10,10 @@ import (
 	"net/http"
 )
 
+// https://github.com/CloudyKit/jet/wiki/1.-Getting-Started
+//   $ go get -u github.com/CloudyKit/jet
+//  jet is alternate template engine to help setup view templates
+
 // repository pattern - allow us to swap out components of site with little changes to the code that uses it
 // repository type - for now config, later add db connection
 type Repository struct {
