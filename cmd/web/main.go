@@ -23,6 +23,23 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
+	err := run()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(fmt.Sprintf("starting app on port %s", portNumber))
+	// http.ListenAndServe(portNumber, nil)
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+	err = srv.ListenAndServe()
+	log.Fatal(err)
+}
+
+func run() error {
 	gob.Register(models.Reservation{}) // allow storing reservation model in session
 
 	app.InProduction = false
@@ -37,7 +54,8 @@ func main() {
 	app.UseCache = false
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
-		log.Fatal("cannot load templates")
+		// log.Fatal("cannot load templates")
+		return err
 	}
 	app.TemplateCache = tc
 
@@ -56,12 +74,6 @@ func main() {
 		}
 		fmt.Println(fmt.Sprintf("Bytes written: %d", n))
 	})*/
-	fmt.Println(fmt.Sprintf("starting app on port %s", portNumber))
-	// http.ListenAndServe(portNumber, nil)
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
-	err = srv.ListenAndServe()
-	log.Fatal(err)
+
+	return nil
 }
