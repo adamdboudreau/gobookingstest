@@ -131,14 +131,32 @@ func TestForm_IsEmailAnEmail(t *testing.T) {
 
 	postedData := url.Values{}
 	postedData.Add("email", "a@b.com")
-
-	r = httptest.NewRequest("POST", "/whatever", nil)
-	r.PostForm = postedData
-	form = New(r.PostForm)
+	form = New(postedData)
 
 	isEmail = form.IsEmail("email")
 
 	if !isEmail {
 		t.Error("not email when it is an email")
+	}
+
+	postedData = url.Values{}
+	postedData.Add("email", "q")
+	form = New(postedData)
+
+	isEmail = form.IsEmail("email")
+
+	if isEmail {
+		t.Error("email when it is not an email")
+	} else {
+		err := form.Errors.Get("field-that-isnt-in-errors")
+		if err != "" {
+			t.Error("error exists when it should not")
+		}
+		err = form.Errors.Get("email")
+
+		if err != "Invalid email address" {
+			t.Error("error message not invalid email address when it is not email")
+		}
+
 	}
 }
