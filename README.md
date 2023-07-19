@@ -10,6 +10,12 @@ This is the repository for my bookings & reservations project.
 - Uses [edwards](https://github.com/alexedwards/scs)
 - Uses [nosurf](https://github.com/justinas/nosurf)
 
+## run local on mac
+./run.sh
+
+## run local on windows
+run.bat
+
 ## run go test in specific folder
 go test -v
 
