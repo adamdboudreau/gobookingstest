@@ -1,15 +1,15 @@
 package render
 
 import (
+	"bookings/pkg/config"
+	"bookings/pkg/models"
 	"bytes"
+	"errors"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
-
-	"bookings/pkg/config"
-	"bookings/pkg/models"
 
 	"github.com/justinas/nosurf"
 )
@@ -33,7 +33,7 @@ func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateDa
 }
 
 // RenderTemplate renders templates
-func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) error {
 	var tc map[string]*template.Template
 	if app.UseCache {
 		tc = app.TemplateCache
@@ -50,7 +50,8 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 	// get requested template from cache
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("could not get template from cache")
+		// log.Fatal("could not get template from cache")
+		return errors.New("Can't get template from cache")
 	}
 	buf := new(bytes.Buffer)
 
@@ -61,6 +62,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 	_, err := buf.WriteTo(w)
 	if err != nil {
 		log.Println("error writing template to browser", err)
+		return err
 	}
 
 	// read from disc each request
@@ -70,6 +72,7 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 		fmt.Println("error parsing template:", err)
 		return
 	} */
+	return nil
 }
 
 func CreateTemplateCache() (map[string]*template.Template, error) {

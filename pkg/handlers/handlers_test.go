@@ -30,11 +30,19 @@ var theTests = []struct {
 		{key: "end", value: "2020-01-01"},
 	}, http.StatusOK},
 	{"post_book_room", "/book_room", "POST", []postData{
-		{key: "first_name", value: "John"},
-		{key: "last_name", value: "Doe"},
+		{key: "firstName", value: "J"},
+		{key: "lastName", value: "D"},
+		{key: "email", value: "jd"},
+		{key: "phone", value: "1234567890"},
+	}, http.StatusOK},
+	{"post_book_room", "/book_room", "POST", []postData{
+		{key: "firstName", value: "John"},
+		{key: "lastName", value: "Doe"},
 		{key: "email", value: "j@d.com"},
 		{key: "phone", value: "1234567890"},
 	}, http.StatusOK},
+	{"post_availability_json", "/availability_json", "POST", []postData{}, http.StatusOK},
+	{"get_reservation_summary", "/reservation_summary", "GET", []postData{}, http.StatusOK},
 }
 
 func TestHandlers(t *testing.T) {

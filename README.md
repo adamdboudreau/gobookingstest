@@ -13,6 +13,9 @@ This is the repository for my bookings & reservations project.
 ## run go test in specific folder
 go test -v
 
+## run go test coverage in specific folder
+go test -cover
+
 ## run go test in specific folder with coverage.out converted to html results
 go test -coverprofile=coverage.out && go tool cover -html=coverage.out
 
