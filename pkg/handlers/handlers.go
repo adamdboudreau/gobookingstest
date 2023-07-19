@@ -135,8 +135,8 @@ func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
 	form := forms.New(r.PostForm)
 	// form.Has("firstName", r)
 	form.Required("firstName", "lastName", "phone", "email")
-	form.MinLength("firstName", 3, r)
-	form.MinLength("lastName", 3, r)
+	form.MinLength("firstName", 3)
+	form.MinLength("lastName", 3)
 	form.IsEmail("email")
 
 	if !form.Valid() {
