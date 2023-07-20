@@ -5,4 +5,6 @@ type Reservation struct {
 	LastName  string
 	Phone     string
 	Email     string
+	RoomId    int
+	Id        int
 }

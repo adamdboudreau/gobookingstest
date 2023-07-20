@@ -1,6 +1,7 @@
 package config
 
 import (
+	"bookings/pkg/storage/mysql"
 	"html/template"
 	"log"
 
@@ -15,4 +16,5 @@ type AppConfig struct {
 	ErrorLog      *log.Logger
 	InProduction  bool
 	Session       *scs.SessionManager
+	DB            *mysql.StorageRepository
 }

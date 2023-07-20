@@ -13,6 +13,7 @@ import (
 	"bookings/pkg/helpers"
 	"bookings/pkg/models"
 	"bookings/pkg/render"
+	"bookings/pkg/storage/mysql"
 
 	"github.com/alexedwards/scs/v2"
 )
@@ -68,6 +69,22 @@ func run() error {
 		return err
 	}
 	app.TemplateCache = tc
+
+	mysqlDB, err := mysql.NewStorageRepository("", "", "")
+	if err != nil {
+		// log.Fatal("cannot load templates")
+		return err
+	}
+	app.DB = mysqlDB
+	// test local query
+	// testRes := models.Reservation{FirstName: "test", LastName: "user", Email: "test@abc.com", Phone: "1234"}
+	// ctx := context.Background() // background nil context
+	// app.DB.SaveReservation(ctx, testRes)
+	// res, err := app.DB.FindReservation(ctx, testRes.Email)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Println("found user ", res.FirstName, res.LastName)
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
