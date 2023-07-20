@@ -3,6 +3,7 @@ package handlers
 import (
 	"bookings/pkg/config"
 	"bookings/pkg/forms"
+	"bookings/pkg/helpers"
 	"bookings/pkg/models"
 	"bookings/pkg/render"
 	"encoding/json"
@@ -93,7 +94,8 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	}
 	out, err := json.MarshalIndent(resp, "", "   ")
 	if err != nil {
-		fmt.Println(err)
+		helpers.ServerError(w, err)
+		return
 	}
 	fmt.Println(string(out))
 	w.Header().Set("Content-Type", "application/json")
@@ -122,7 +124,7 @@ func (m *Repository) BookRoom(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		fmt.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -160,7 +162,8 @@ func (m *Repository) PostBookRoom(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		fmt.Println("cannot get item from session")
+		m.App.ErrorLog.Println("cannot get item from session")
+		// fmt.Println("cannot get item from session")
 		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
