@@ -1,5 +1,9 @@
 package models
 
+import (
+	"time"
+)
+
 type Reservation struct {
 	Id        int
 	RoomId    int

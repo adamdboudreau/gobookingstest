@@ -51,24 +51,35 @@ func testFindPeople(mysqlDB *mysql.StorageRepository, testPerson models.People) 
 		fmt.Printf("4q found person: %v", person)
 	}
 
-	testPerson = models.People{FirstName: "Adam", LastName: "Boudreau", Email: "adam@demo.com", Phone: ""}
-	people, err = mysqlDB.FindPerson(ctx, testPerson, false)
-	fmt.Printf("find person err: %v", err)
-	for _, person := range people {
-		fmt.Printf("3q found person: %v", person)
+	testPerson.Id = 1
+	reservations, err := mysqlDB.FindReservationsForPerson(ctx, testPerson, false)
+	fmt.Printf("\nfind reservations err: %v", err)
+	for _, reso := range reservations {
+		fmt.Printf("reso: %v", reso)
 	}
 
-	testPerson = models.People{FirstName: "Adam", LastName: "Boudreau", Email: "", Phone: ""}
-	people, err = mysqlDB.FindPerson(ctx, testPerson, false)
-	fmt.Printf("find person err: %v", err)
-	for _, person := range people {
-		fmt.Printf("2q found person: %v", person)
-	}
+	room, err := mysqlDB.FindRoom(ctx, "Majors Room")
+	fmt.Printf("\nfind room err: %v", err)
+	fmt.Printf("room: %v", room)
 
-	testPerson = models.People{FirstName: "Adam", LastName: "", Email: "", Phone: ""}
-	people, err = mysqlDB.FindPerson(ctx, testPerson, false)
-	fmt.Printf("find person err: %v", err)
-	for _, person := range people {
-		fmt.Printf("1q found person: %v", person)
-	}
+	// testPerson = models.People{FirstName: "Adam", LastName: "Boudreau", Email: "adam@demo.com", Phone: ""}
+	// people, err = mysqlDB.FindPerson(ctx, testPerson, false)
+	// fmt.Printf("find person err: %v", err)
+	// for _, person := range people {
+	// 	fmt.Printf("3q found person: %v", person)
+	// }
+
+	// testPerson = models.People{FirstName: "Adam", LastName: "Boudreau", Email: "", Phone: ""}
+	// people, err = mysqlDB.FindPerson(ctx, testPerson, false)
+	// fmt.Printf("find person err: %v", err)
+	// for _, person := range people {
+	// 	fmt.Printf("2q found person: %v", person)
+	// }
+
+	// testPerson = models.People{FirstName: "Adam", LastName: "", Email: "", Phone: ""}
+	// people, err = mysqlDB.FindPerson(ctx, testPerson, false)
+	// fmt.Printf("find person err: %v", err)
+	// for _, person := range people {
+	// 	fmt.Printf("1q found person: %v", person)
+	// }
 }

@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 	"time"
-
+	"context"
 	"bookings/pkg/config"
 	"bookings/pkg/handlers"
 	"bookings/pkg/helpers"
@@ -72,19 +72,13 @@ func run() error {
 
 	mysqlDB, err := mysql.NewStorageRepository("", "", "")
 	if err != nil {
-		// log.Fatal("cannot load templates")
+		// log.Fatal("cannot load db")
 		return err
 	}
 	app.DB = mysqlDB
-	// test local query
-	// testRes := models.Reservation{FirstName: "test", LastName: "user", Email: "test@abc.com", Phone: "1234"}
-	// ctx := context.Background() // background nil context
-	// app.DB.SaveReservation(ctx, testRes)
-	// res, err := app.DB.FindReservation(ctx, testRes.Email)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// fmt.Println("found user ", res.FirstName, res.LastName)
+	testRes := models.Reservation{RoomId: 1, FirstName: "test2", LastName: "user2", Email: "test222@abc.com", Phone: "123455"}
+	ctx := context.Background()
+	app.DB.SaveReservation(ctx, testRes)
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
