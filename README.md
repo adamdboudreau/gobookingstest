@@ -34,8 +34,8 @@ go test -coverprofile=coverage.out && go tool cover -html=coverage.out
 ### setup tables ###
 CREATE DATABASE bookings
 
-CREATE TABLE reservations (id MEDIUMINT NOT NULL AUTO_INCREMENT,room_id int,last_name varchar(255),first_name varchar(255),email varchar(255),phone varchar(255), PRIMARY KEY (id));
+CREATE TABLE reservations (id MEDIUMINT NOT NULL AUTO_INCREMENT,room_id int,people_id int, start_date DATE, end_date DATE, PRIMARY KEY (id));
 
 CREATE TABLE rooms (id MEDIUMINT NOT NULL AUTO_INCREMENT,name varchar(255),description varchar(255), PRIMARY KEY (id));
 
-CREATE TABLE room_schedules (id MEDIUMINT NOT NULL AUTO_INCREMENT,room_id int, reservation_id int, start_date DATE, end_date DATE, PRIMARY KEY (id));
+CREATE TABLE people (id MEDIUMINT NOT NULL AUTO_INCREMENT,last_name varchar(255),first_name varchar(255),email varchar(255),phone varchar(255), PRIMARY KEY (id));

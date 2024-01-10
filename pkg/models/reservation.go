@@ -1,10 +1,9 @@
 package models
 
 type Reservation struct {
-	FirstName string
-	LastName  string
-	Phone     string
-	Email     string
-	RoomId    int
 	Id        int
+	RoomId    int
+	PeopleId  int
+	StartDate time.Time
+	EndDate   time.Time
 }
